@@ -26,7 +26,8 @@ pipeline{
                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.189.116.64:docker image build -t  $(bulild_name):$(build_no) .' 
                     sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.189.116.64:docker images' 
                 }
-    
-    }
+           }
 
+        }
+    }    
 }
