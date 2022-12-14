@@ -40,7 +40,7 @@ pipeline{
             steps{
                 sshagent(['ansible-node']) {
                     withCredentials([string(credentialsId: 'docker-passwd', variable: 'docker-passwd')]) {
-                       sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.189.116.64 docker login -u sivaprasad1996 -p $(docker-passwd)'
+                       sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.189.116.64 docker login -u sivaprasad1996  --password $(docker-passwd)'
                         sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.189.116.64 cd /home/ubuntu'
                         sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.189.116.64 docker image push sivaprasad1996/httpd:v1'
                     }
