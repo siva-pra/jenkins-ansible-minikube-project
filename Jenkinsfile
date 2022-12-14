@@ -18,7 +18,7 @@ pipeline{
             }
             
         }
-        stage("dockerfile transfor ansible"){
+        stage("docker image build in ansible"){
             steps{
                 sshagent(['ansible-node']) {
                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.189.116.64'
