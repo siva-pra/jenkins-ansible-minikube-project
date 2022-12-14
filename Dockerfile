@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM centos:latest
 RUN  apt-get update
 RUN  apt-get install -y httpd \
 zip \
@@ -8,5 +8,5 @@ WORKDIR /var/www/html/
 RUN unzip photogenic.zip
 RUN cp -rvf photogenic/* .
 RUN rm -rf photogenic photogenic.zip
-ENTRYPOINT ["/usr/sbin/apache2", "-k", "start"]
+ENTRYPOINT ["/usr/sbin/httpd", "-D", "FOREGROUND"]
 EXPOSE 80
