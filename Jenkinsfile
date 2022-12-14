@@ -23,10 +23,17 @@ pipeline{
                 sshagent(['ansible-node']) {
                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.189.116.64 cd /home/ubuntu'
                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.189.116.64 docker image build -t  httpd:v1 .' 
-                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.189.116.64:docker images' 
+                    
                 }
            }
 
+        }
+        stage("tagging the docker image"){
+            steps{
+                sshagent(['ansible-node']) {
+                   sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.189.116.64 cd /home/ubuntu'
+                   sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.189.116.64 docker image -t sivaprasad/httpd:v1'
+            }
         }
     }    
 }
