@@ -16,7 +16,7 @@ pipeline{
                     
                 }
             }
-            
+          
         }
         stage("docker image build in ansible"){
             steps{
@@ -43,9 +43,9 @@ pipeline{
                     withCredentials([string(credentialsId: 'docker-hub-passwd', variable: 'docker-hub-passwd')]) {
                         sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.189.116.64 cd /home/ubuntu'
                         sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.189.116.64 docker image push -u sivaprasad1996 -p $(docker-hub-passwd)  sivaprasad1996/httpd:v1'
-                }
+                        }
+               }    }
             }
         }
-
     }
-}
+}     
