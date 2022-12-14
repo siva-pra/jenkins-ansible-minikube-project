@@ -38,14 +38,13 @@ pipeline{
         } 
         stage("push the docker image in docker hub"){
             steps{
-               steps{
                 sshagent(['ansible-node']) {
                     withCredentials([string(credentialsId: 'docker-hub-passwd', variable: 'docker-hub-passwd')]) {
                        sh 'ssh -o StrictHostKeyChecking=no docker image push -u sivaprasad1996 -p $(docker-hub-passwd)'
                         sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.189.116.64 cd /home/ubuntu'
                         sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.189.116.64 docker image push sivaprasad1996/httpd:v1'
-                        }
-               }    }
+                    }
+               }    
             }
         }
     }
