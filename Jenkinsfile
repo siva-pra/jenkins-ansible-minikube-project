@@ -11,7 +11,7 @@ pipeline{
         stage("dockerfile transfor ansible"){
             steps{
                 sshagent(['ansible-node']) {
-                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.189.116.64'
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.189.116.64 cd /home/ubuntu'
                     sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/pipeline-project ubuntu@54.189.116.64 /home/ubuntu'
                 }
             }
