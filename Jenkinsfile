@@ -1,6 +1,7 @@
 pipeline{
+
     stages{
-        stage(SCM"){
+        stage("SCM"){
             steps{
                 git 'https://github.com/siva-pra/jenkins-ansible-minikube-project.git'
            
