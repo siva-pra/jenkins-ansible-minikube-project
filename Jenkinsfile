@@ -22,7 +22,7 @@ pipeline{
             steps{
                 sshagent(['ansible-node']) {
                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.189.116.64'
-                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.189.116.64:cd /home/ubuntu'
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.189.116.64:sudo su'
                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.189.116.64:docker image build -t  $(bulild_name):$(build_no) .' 
                     sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.189.116.64:docker images' 
                 }
