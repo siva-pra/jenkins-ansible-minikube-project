@@ -10,8 +10,8 @@ pipeline{
         stage("dockerfile transfor ansible"){
             steps{
                 sshagent(['ansible-node']) {
-                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.212.143.246'
-                    sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/pipeline-project/D* ubuntu@54.212.143.246:/home/ubuntu/'
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@35.165.252.255'
+                    sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/pipeline-project/D* ubuntu@35.165.252.255:/home/ubuntu/'
                     
                 }
             }
@@ -20,8 +20,8 @@ pipeline{
         stage("docker image build in ansible"){
             steps{
                 sshagent(['ansible-node']) {
-                   sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.212.143.246 cd /home/ubuntu'
-                   sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.212.143.246 docker image build -t  httpd:v1 .' 
+                   sh 'ssh -o StrictHostKeyChecking=no ubuntu@35.165.252.255 cd /home/ubuntu'
+                   sh 'ssh -o StrictHostKeyChecking=no ubuntu@35.165.252.255 docker image build -t  httpd:v1 .' 
                     
                 }
            }
@@ -30,8 +30,8 @@ pipeline{
         stage("tagging the docker image"){
             steps{
                 sshagent(['ansible-node']) {
-                   sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.212.143.246 cd /home/ubuntu'
-                   sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.212.143.246 docker image tag httpd:v1 sivaprasad1996/httpd:v1'
+                   sh 'ssh -o StrictHostKeyChecking=no ubuntu@35.165.252.255 cd /home/ubuntu'
+                   sh 'ssh -o StrictHostKeyChecking=no ubuntu@35.165.252.255 docker image tag httpd:v1 sivaprasad1996/httpd:v1'
                }
            }
         } 
@@ -39,9 +39,9 @@ pipeline{
             steps{
                 sshagent(['ansible-node']) {
                     withCredentials([string(credentialsId: 'dockerhub_passwd', variable: 'dockerhub_passwd')]) {
-                       sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.212.143.246 docker login -u sivaprasad1996 --password $(dockerhub_passwd)'
-                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.212.143.246 cd /home/ubuntu'
-                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.212.143.246 docker image push sivaprasad1996/httpd:v1'
+                       sh 'ssh -o StrictHostKeyChecking=no ubuntu@35.165.252.255 docker login -u sivaprasad1996 --password $(dockerhub_passwd)'
+                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@35.165.252.255 cd /home/ubuntu'
+                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@35.165.252.255 docker image push sivaprasad1996/httpd:v1'
                     }
                }    
             }
